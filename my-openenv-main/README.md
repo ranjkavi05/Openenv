@@ -54,6 +54,7 @@ Real-life decisions are interconnected — working overtime earns money but cost
 | 🎚️ **3 Difficulty Levels** | Easy, Medium, Hard with increasing complexity |
 | 🏆 **Agent Grading** | 0.0–1.0 normalized life-quality score |
 | 🤖 **Baseline Agent** | Rule-based AI with decision explanations |
+| 🧠 **LLM-Powered Agent** | OpenAI-compatible LLM agent via `inference.py` |
 | 🎨 **Stunning Dashboard** | Glassmorphism UI with dark/light mode, Plotly charts |
 | 🚀 **One-Command Deploy** | Docker + Hugging Face Spaces ready |
 
@@ -63,13 +64,17 @@ Real-life decisions are interconnected — working overtime earns money but cost
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        app.py (UI)                          │
+│                    inference.py (Entry Point)                │
+│         LLM Agent ← OpenAI Client (API_BASE_URL,            │
+│                      MODEL_NAME, HF_TOKEN)                  │
+├─────────────────────────────────────────────────────────────┤
+│                        app.py (UI)                           │
 │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌───────────────┐  │
 │  │ Metrics  │ │ Timeline │ │  Events  │ │ AI Decisions  │  │
 │  │  Cards   │ │  Chart   │ │   Feed   │ │    Panel      │  │
 │  └──────────┘ └──────────┘ └──────────┘ └───────────────┘  │
 ├─────────────────────────────────────────────────────────────┤
-│                      env.py (Core)                          │
+│                      env.py (Core)                           │
 │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌───────────────┐  │
 │  │  State   │ │  Reward  │ │   Time   │ │  Difficulty   │  │
 │  │  Engine  │ │  System  │ │  System  │ │   Config      │  │
@@ -101,6 +106,33 @@ cd ai-digital-life-simulator
 # Install dependencies
 pip install -r requirements.txt
 ```
+
+### Environment Variables
+
+Before running the inference script, set the following environment variables:
+
+| Variable | Description |
+|----------|-------------|
+| `API_BASE_URL` | The API endpoint for the LLM |
+| `MODEL_NAME` | The model identifier to use for inference |
+| `HF_TOKEN` | Your Hugging Face / API key |
+
+```bash
+# Example: set environment variables
+export API_BASE_URL="https://api-inference.huggingface.co/v1"
+export MODEL_NAME="meta-llama/Meta-Llama-3-8B-Instruct"
+export HF_TOKEN="hf_your_token_here"
+```
+
+> **Note:** If these variables are not set, the inference script will automatically fall back to a deterministic rule-based agent.
+
+### Run the Inference Script (Required for Submission)
+
+```bash
+python inference.py
+```
+
+This runs all 3 tasks (`wealth_builder`, `career_climber`, `perfect_balance`) using the LLM-powered agent via the OpenAI Client, producing grader scores in the 0.0–1.0 range.
 
 ### Run the Dashboard
 
@@ -168,28 +200,42 @@ Probabilistic life events that affect multiple variables:
 
 ## 📊 Example Output
 
+### Inference Script (`python inference.py`)
+
 ```
 ============================================================
-  🧬  AI DIGITAL LIFE SIMULATOR  —  Baseline Agent Run
+  AI DIGITAL LIFE SIMULATOR - Inference Script
 ============================================================
-  Personality : balanced
-  Difficulty  : medium
-  Max Steps   : 100
+  API_BASE_URL : https://api-inference.huggingface.co/v1
+  MODEL_NAME   : meta-llama/Meta-Llama-3-8B-Instruct
+  HF_TOKEN     : ********...abcd
 ============================================================
 
-─── Step 100  | Week 100 | Age 26.9 ───
-  Health         |██████████████████████████▒▒▒▒|   87.4 / 100
-  Money          |████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒| 1647.6 / 10000
-  Stress         |███████████████████████▒▒▒▒▒▒▒|   78.0 / 100
-  Career         |████████████████████████▒▒▒▒▒▒|   82.3 / 100
+  Running task: wealth_builder
+  --------------------------------------------------
+    Step  25 | Action: work_overtime   | Reward: +0.0120 | Cumulative: -0.0000
+    Step 100 | Action: invest_money    | Reward: -0.0150 | Cumulative: +0.0897
+  -- Result: Grade = 0.0379  |  [!] Critical - Life in Crisis
+
+  Running task: career_climber
+  --------------------------------------------------
+    Step 100 | Action: learn_skill     | Reward: +0.2700 | Cumulative: +3.1700
+  -- Result: Grade = 1.0000  |  [*] Excellent - Balanced & Thriving
+
+  Running task: perfect_balance
+  --------------------------------------------------
+    Step 100 | Action: work_overtime   | Reward: +0.4753 | Cumulative: +41.1787
+  -- Result: Grade = 0.5182  |  [~] Average - Room for Improvement
 
 ============================================================
-  📊  FINAL RESULTS
+  FINAL RESULTS SUMMARY
 ============================================================
-  Total Steps     : 100
-  Total Reward    : +40.9853
-  Final Grade     : 0.4629
-  Assessment      : ⚠️ Average — Room for Improvement
+  [PASS] wealth_builder       | Grade: 0.0379 | Steps: 100
+  [PASS] career_climber       | Grade: 1.0000 | Steps: 100
+  [PASS] perfect_balance      | Grade: 0.5182 | Steps: 100
+
+  Total time: 0.4s
+  All scores in 0.0-1.0 range: YES
 ============================================================
 ```
 
@@ -218,13 +264,14 @@ docker run -p 8501:8501 life-sim
 
 ```
 OpenEnv_Soln/
+├── inference.py        # ** Main inference script (required for submission) **
 ├── app.py              # Streamlit UI dashboard
 ├── env.py              # Core environment (reset/step/state)
 ├── models.py           # Data models, enums, dataclasses
 ├── utils.py            # Utility functions
 ├── events.py           # Dynamic random events system
 ├── personalities.py    # Personality modifier profiles
-├── grader.py           # Agent grading (0.0–1.0)
+├── grader.py           # Agent grading (0.0-1.0)
 ├── agent.py            # Baseline rule-based AI agent
 ├── openenv.yaml        # OpenEnv specification
 ├── style.css           # Glassmorphism CSS theme
@@ -240,6 +287,7 @@ OpenEnv_Soln/
 ## 🛠️ Tech Stack
 
 - **Python 3.11** — Core language
+- **OpenAI Client** — LLM-based agent decisions (via `API_BASE_URL`, `MODEL_NAME`, `HF_TOKEN`)
 - **Streamlit** — Interactive web dashboard
 - **Plotly** — Beautiful interactive charts
 - **CSS3** — Glassmorphism, animations, theming
