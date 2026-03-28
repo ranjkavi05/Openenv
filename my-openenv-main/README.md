@@ -1,3 +1,14 @@
+---
+title: AI Digital Life Simulator 🧬
+emoji: 🧬
+colorFrom: indigo
+colorTo: purple
+sdk: streamlit
+sdk_version: 1.30.0
+app_file: app.py
+pinned: false
+---
+
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python" alt="Python">
   <img src="https://img.shields.io/badge/Streamlit-1.30+-red?style=for-the-badge&logo=streamlit" alt="Streamlit">
@@ -94,6 +105,7 @@ pip install -r requirements.txt
 ### Run the Dashboard
 
 ```bash
+# From the project root
 streamlit run app.py
 ```
 
@@ -188,6 +200,7 @@ Probabilistic life events that affect multiple variables:
 ### Docker
 
 ```bash
+# From the project root
 docker build -t life-sim .
 docker run -p 8501:8501 life-sim
 ```
@@ -196,8 +209,8 @@ docker run -p 8501:8501 life-sim
 
 1. Create a new Space on [huggingface.co/spaces](https://huggingface.co/spaces)
 2. Select **Streamlit** as the SDK
-3. Upload all project files
-4. The Space will automatically build and deploy
+3. Upload all project files (ensure `app.py` is in the root)
+4. The Space will automatically build and deploy using the metadata provided in this README.
 
 ---
 
