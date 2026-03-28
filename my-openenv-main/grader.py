@@ -1,11 +1,11 @@
 """
-grader.py — Agent grading system for the AI Digital Life Simulator.
+grader.py - Agent grading system for the AI Digital Life Simulator.
 
 Evaluates the quality of an agent's final life state on a normalized
-0.0–1.0 scale, where:
-    ~0.2   → poor life outcome
-    ~0.5   → average outcome
-    ~0.9+  → well-balanced, thriving life
+0.0-1.0 scale, where:
+    ~0.2   -> poor life outcome
+    ~0.5   -> average outcome
+    ~0.9+  -> well-balanced, thriving life
 
 Grading is fair, deterministic, and independent of personality/difficulty.
 """
@@ -30,7 +30,7 @@ MONEY_NORM_CAP = 10_000.0
 
 
 def grade_agent(final_state: Dict[str, Any], task_type: str = "perfect_balance") -> float:
-    """Compute a 0.0–1.0 grade from a final life-state dictionary based on TaskType.
+    """Compute a 0.0-1.0 grade from a final life-state dictionary based on TaskType.
 
     Parameters
     ----------
@@ -41,7 +41,7 @@ def grade_agent(final_state: Dict[str, Any], task_type: str = "perfect_balance")
 
     Returns
     -------
-    float  — grade between 0.0 and 1.0
+    float  - grade between 0.0 and 1.0
     """
     if task_type == "wealth_builder":
         # Objective: Maximize money (> $50,000)
@@ -62,7 +62,7 @@ def grade_agent(final_state: Dict[str, Any], task_type: str = "perfect_balance")
         return round(clamp(base_score - penalty, 0.0, 1.0), 4)
 
     # PERFECT_BALANCE
-    # ── 1. Normalize each dimension ──
+    # -- 1. Normalize each dimension --
     health_n     = normalize(final_state.get("health", 0), 0, 100)
     money_n      = normalize(final_state.get("money", 0), 0, MONEY_NORM_CAP)
     career_n     = normalize(final_state.get("career", 0), 0, 100)
@@ -70,7 +70,7 @@ def grade_agent(final_state: Dict[str, Any], task_type: str = "perfect_balance")
     happy_n      = normalize(final_state.get("happiness", 0), 0, 100)
     stress_inv_n = 1.0 - normalize(final_state.get("stress", 50), 0, 100)
 
-    # ── 2. Weighted base score ──
+    # -- 2. Weighted base score --
     norm_vals = {
         "health":        health_n,
         "money":         money_n,
@@ -81,15 +81,15 @@ def grade_agent(final_state: Dict[str, Any], task_type: str = "perfect_balance")
     }
     weighted_sum = sum(norm_vals[k] * GRADE_WEIGHTS[k] for k in GRADE_WEIGHTS)
 
-    # ── 3. Imbalance penalty ──
+    # -- 3. Imbalance penalty --
     core = [health_n, career_n, rel_n, happy_n, stress_inv_n]
     imb = imbalance_penalty(core)
     penalty = imb * 0.20      # up to 20% deduction for extreme imbalance
 
-    # ── 4. Survival bonus ──
+    # -- 4. Survival bonus --
     survival = 0.05 if final_state.get("health", 0) > 0 else 0.0
 
-    # ── 5. Final score ──
+    # -- 5. Final score --
     score = weighted_sum - penalty + survival
     return round(clamp(score, 0.0, 1.0), 4)
 
@@ -97,12 +97,12 @@ def grade_agent(final_state: Dict[str, Any], task_type: str = "perfect_balance")
 def grade_label(score: float) -> str:
     """Return a human-readable label for a numeric grade."""
     if score >= 0.85:
-        return "⭐ Excellent — Balanced & Thriving"
+        return "[*] Excellent - Balanced & Thriving"
     elif score >= 0.65:
-        return "✅ Good — Healthy Life"
+        return "[+] Good - Healthy Life"
     elif score >= 0.45:
-        return "⚠️ Average — Room for Improvement"
+        return "[~] Average - Room for Improvement"
     elif score >= 0.25:
-        return "❌ Poor — Struggling"
+        return "[-] Poor - Struggling"
     else:
-        return "💀 Critical — Life in Crisis"
+        return "[!] Critical - Life in Crisis"

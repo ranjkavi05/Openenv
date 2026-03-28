@@ -9,9 +9,9 @@ Usage:
     python agent.py
 """
 
-from __future__ import annotations
 import random
-from typing import Dict, Any, List
+import json
+from typing import Dict, Any, List, Optional
 
 from env import LifeSimulatorEnv
 from models import Action, Personality, Difficulty, TaskType
