@@ -1,0 +1,131 @@
+# OpenEnv Configuration — AI Digital Life Simulator
+# Follows the OpenEnv specification for environment registration
+
+name: ai-digital-life-simulator
+version: "1.0.0"
+description: >
+  A reinforcement-learning environment that simulates real-world human life
+  decisions. An agent must balance health, career, relationships, finances,
+  and stress to achieve a fulfilling life. Features personality modes, dynamic
+  random events, time progression, and three difficulty levels.
+
+author: AI Digital Life Simulator Team
+license: MIT
+
+# ─── Action Space ───────────────────────────────
+action_space:
+  type: discrete
+  n: 6
+  actions:
+    - name: work_overtime
+      description: Work extra hours to earn money and advance career, at the cost of health and stress.
+    - name: exercise
+      description: Physical exercise to improve health and reduce stress.
+    - name: invest_money
+      description: Invest savings with risk-reward dynamics and delayed returns.
+    - name: learn_skill
+      description: Study or learn to boost career growth.
+    - name: socialize
+      description: Spend time with friends and family to improve relationships.
+    - name: rest
+      description: Take time off to reduce stress and recover health.
+
+# ─── Observation Space ──────────────────────────
+observation_space:
+  type: dict
+  variables:
+    - name: age
+      type: float
+      range: [18.0, 100.0]
+      description: Current age in years (starts at 25).
+    - name: health
+      type: float
+      range: [0.0, 100.0]
+      description: Physical health (0 = dead, 100 = peak fitness).
+    - name: money
+      type: float
+      range: [0.0, 100000.0]
+      description: Available funds in abstract dollars.
+    - name: stress
+      type: float
+      range: [0.0, 100.0]
+      description: Stress level (100 = total burnout, triggers termination).
+    - name: career
+      type: float
+      range: [0.0, 100.0]
+      description: Career progression and professional achievement.
+    - name: relationships
+      type: float
+      range: [0.0, 100.0]
+      description: Quality of social and family connections.
+    - name: happiness
+      type: float
+      range: [0.0, 100.0]
+      description: Overall life satisfaction.
+
+# ─── Reward ─────────────────────────────────────
+reward:
+  type: float
+  range: [-1.0, 1.0]
+  description: >
+    Multi-dimensional reward encouraging balanced life. Combines weighted
+    scoring of health, money, career, relationships, and inverse-stress.
+    Includes imbalance penalty, consistency bonus for sustained balance,
+    and burnout penalty for chronic high stress.
+
+# ─── Termination ────────────────────────────────
+termination:
+  conditions:
+    - health <= 0 (death)
+    - stress >= 100 (complete burnout)
+    - step_count >= max_steps (simulation time limit)
+
+# ─── Difficulty Levels ──────────────────────────
+difficulty:
+  levels:
+    - name: easy
+      description: No random events, stable conditions, gentle stress accumulation.
+    - name: medium
+      description: Moderate random events (~15%), normal trade-offs.
+    - name: hard
+      description: High event frequency (~30%), accelerated stress, harsher penalties.
+
+# ─── Personality Modes ──────────────────────────
+personality:
+  modes:
+    - name: balanced
+      description: Neutral modifiers across all dimensions (default).
+    - name: risk_taker
+      description: High investment risk, elevated stress baseline.
+    - name: conservative
+      description: Low risk investments, stable growth.
+    - name: lazy
+      description: Low work output, slow career, great at resting.
+    - name: ambitious
+      description: Rapid career growth, high stress, weaker relationships.
+
+# ─── Grading ────────────────────────────────────
+grading:
+  scale: [0.0, 1.0]
+  criteria: >
+    Weighted evaluation of final health, money, career, relationships,
+    happiness, and inverse-stress with imbalance penalty and survival bonus.
+  benchmarks:
+    poor: 0.2
+    average: 0.5
+    balanced: 0.9
+
+# ─── Tasks ──────────────────────────────────────
+tasks:
+  - name: wealth_builder
+    difficulty: easy
+    objective: Maximize money (> $50,000) before simulation end without dying.
+    grader: Wealth Builder Grader (0.0 - 1.0)
+  - name: career_climber
+    difficulty: medium
+    objective: Reach Career > 90 while surviving 150 weeks. Penalizes high stress burnout.
+    grader: Career Climber Grader (0.0 - 1.0)
+  - name: perfect_balance
+    difficulty: hard
+    objective: Maintain > 80 across Health, Career, Wealth, and Relationships simultaneously.
+    grader: Perfect Balance Grader (0.0 - 1.0)

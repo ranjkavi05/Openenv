@@ -1,0 +1,324 @@
+/* ═══════════════════════════════════════════════
+   style.css — Glassmorphism Dark/Light Theme
+   AI Digital Life Simulator Dashboard
+   ═══════════════════════════════════════════════ */
+
+/* ─── CSS Variables (Theme Tokens) ─── */
+:root {
+    /* Light Theme — Refined for Premium Feel */
+    --bg-primary: #f8f9fc;
+    --bg-secondary: rgba(255, 255, 255, 0.85);
+    --bg-card: rgba(255, 255, 255, 0.75);
+    --bg-glass: rgba(255, 255, 255, 0.5);
+    --text-primary: #1e1e3f;
+    --text-secondary: #4a4a75;
+    --text-muted: #8e8eb2;
+    --border-color: rgba(100, 100, 200, 0.1);
+    --shadow-color: rgba(30, 30, 60, 0.05);
+    --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-color: #667eea;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+    --glow: rgba(102, 126, 234, 0.3);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0a0a1a;
+    --bg-secondary: rgba(20, 20, 40, 0.85);
+    --bg-card: rgba(25, 25, 50, 0.65);
+    --bg-glass: rgba(30, 30, 60, 0.45);
+    --text-primary: #e8e8f0;
+    --text-secondary: #a8a8c8;
+    --text-muted: #6868a8;
+    --border-color: rgba(100, 100, 200, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-color: #818cf8;
+    --success: #34d399;
+    --warning: #fbbf24;
+    --danger: #f87171;
+    --info: #60a5fa;
+    --glow: rgba(129, 140, 248, 0.4);
+}
+
+/* ─── Global Styles ─── */
+.stApp {
+    background: var(--bg-primary) !important;
+    transition: background 0.5s ease;
+}
+
+/* ─── Glassmorphism Card ─── */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 32px var(--shadow-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px var(--shadow-color), 0 0 15px var(--glow);
+}
+
+/* ─── Metric Card ─── */
+.metric-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+    border-radius: 12px 12px 0 0;
+}
+
+.metric-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.metric-emoji {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
+
+/* ─── Custom Progress Bar ─── */
+.progress-container {
+    background: rgba(128, 128, 128, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 12px;
+    margin-top: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.8s ease;
+    background-size: 200% 200%;
+    animation: shimmer 2s ease infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.progress-health { background: linear-gradient(90deg, #10b981, #34d399, #10b981); }
+.progress-money { background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b); }
+.progress-stress { background: linear-gradient(90deg, #ef4444, #f87171, #ef4444); }
+.progress-career { background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6); }
+.progress-relationships { background: linear-gradient(90deg, #ec4899, #f472b6, #ec4899); }
+.progress-happiness { background: linear-gradient(90deg, #8b5cf6, #a78bfa, #8b5cf6); }
+
+/* ─── Event Notification ─── */
+.event-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 0 12px 12px 0;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    animation: slideIn 0.5s ease;
+    cursor: pointer;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.event-card:hover {
+    background: var(--bg-card);
+}
+
+.event-step {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.event-text {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* ─── Score Display ─── */
+.score-display {
+    background: var(--accent-gradient);
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.score-display::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+.score-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
+}
+
+.score-label {
+    font-size: 1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* ─── Action Button ─── */
+.action-btn {
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.action-btn:hover {
+    background: var(--accent-gradient);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--glow);
+}
+
+/* ─── Title / Header ─── */
+.dashboard-title {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.dashboard-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-top: 4px;
+}
+
+/* ─── Smooth Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 3px;
+}
+
+/* ─── Responsive tweaks ─── */
+@media (max-width: 768px) {
+    .dashboard-title { font-size: 1.6rem; }
+    .metric-value { font-size: 1.5rem; }
+}
+
+/* ─── Decision panel ─── */
+.decision-panel {
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 8px;
+}
+
+.decision-action {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.decision-reason {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* ─── Timeline dot ─── */
+.timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* ─── Animations for page load ─── */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+.fade-in-delay-4 { animation-delay: 0.4s; }
