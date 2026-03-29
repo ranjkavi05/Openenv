@@ -1,4 +1,4 @@
-# OpenEnv Configuration — AI Digital Life Simulator
+# OpenEnv Configuration — LifeOS ✨
 # Follows the OpenEnv specification for environment registration
 
 name: ai-digital-life-simulator
@@ -9,7 +9,7 @@ description: >
   and stress to achieve a fulfilling life. Features personality modes, dynamic
   random events, time progression, and three difficulty levels.
 
-author: AI Digital Life Simulator Team
+author: LifeOS ✨ Team
 license: MIT
 
 # ─── Action Space ───────────────────────────────

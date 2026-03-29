@@ -1,6 +1,6 @@
 ---
-title: AI Digital Life Simulator 🧬
-emoji: 🧬
+title: LifeOS ✨ 🌌
+emoji: 🌌
 colorFrom: indigo
 colorTo: purple
 sdk: streamlit
@@ -16,7 +16,7 @@ pinned: false
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License">
 </p>
 
-<h1 align="center">🧬 AI Digital Life Simulator</h1>
+<h1 align="center">🌌 LifeOS ✨</h1>
 
 <p align="center">
   <strong>A reinforcement-learning environment that simulates real-world human life decisions.</strong><br>
@@ -36,7 +36,7 @@ pinned: false
 
 ## 🧩 Problem Statement
 
-Real-life decisions are interconnected — working overtime earns money but costs health and relationships. Traditional RL environments rarely capture this **multidimensional trade-off**. The AI Digital Life Simulator acts as a **Personal Resource Allocation Optimizer** where an AI agent must learn to balance competing priorities across 3 distinct tasks (Wealth, Career, and Balance) to achieve a fulfilling life, strictly adhering to the OpenEnv specification.
+Real-life decisions are interconnected — working overtime earns money but costs health and relationships. Traditional RL environments rarely capture this **multidimensional trade-off**. The LifeOS ✨ acts as a **Personal Resource Allocation Optimizer** where an AI agent must learn to balance competing priorities across 3 distinct tasks (Wealth, Career, and Balance) to achieve a fulfilling life, strictly adhering to the OpenEnv specification.
 
 ---
 
@@ -315,5 +315,5 @@ MIT License — See [LICENSE](LICENSE) for details.
 
 <p align="center">
   Built with ❤️ for the Hackathon<br>
-  <strong>AI Digital Life Simulator</strong> — Navigate life's decisions. Balance your destiny.
+  <strong>LifeOS ✨</strong> — Navigate life's decisions. Balance your destiny.
 </p>

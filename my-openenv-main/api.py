@@ -5,7 +5,7 @@ from typing import Dict, Any, Optional
 from env import LifeSimulatorEnv
 from models import TaskType, Personality, Difficulty, VALID_ACTIONS
 
-app = FastAPI(title="OpenEnv AI Digital Life Simulator API")
+app = FastAPI(title="OpenEnv LifeOS ✨ API")
 
 # Global env instance for evaluation
 env_instance: Optional[LifeSimulatorEnv] = None

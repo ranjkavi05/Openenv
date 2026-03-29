@@ -1,5 +1,5 @@
 """
-app.py — Modern Streamlit Dashboard for the AI Digital Life Simulator.
+app.py — Modern Streamlit Dashboard for the LifeOS ✨.
 
 Features:
 - Dark / Light mode toggle
@@ -32,8 +32,8 @@ from agent import BaselineAgent
 # ═══════════════════════════════════════════════
 
 st.set_page_config(
-    page_title="AI Digital Life Simulator",
-    page_icon="🧬",
+    page_title="LifeOS ✨",
+    page_icon="🌌",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -558,14 +558,16 @@ def render_sidebar():
     """Render the sidebar with controls."""
     with st.sidebar:
         st.markdown(f"""
-        <div style="text-align:center;margin-bottom:16px;">
-            <div style="font-size:2.5rem;">🧬</div>
-            <div style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                 -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-                 background-clip:text;font-size:1.3rem;font-weight:800;">
-                AI Life Simulator</div>
-            <div style="color:{'#a8a8c8' if st.session_state.theme == 'dark' else '#6a6a8a'};font-size:0.85rem;margin-top:4px;">
-                Player: <b>{st.session_state.user_name}</b></div>
+        <div style="text-align:center;margin-bottom:20px;padding:15px;background:rgba(0, 242, 254, 0.05);border-radius:15px;border:1px solid rgba(0,242,254,0.1);box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <div style="font-size:3rem; filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.6));">🌌</div>
+            <div style="font-weight:900;text-transform:uppercase;margin-top:5px;font-family:'Inter', sans-serif;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:2rem;background:linear-gradient(to right, #00f2fe, #4facfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));letter-spacing:1px;">Life</span>
+                <span style="font-size:2.8rem;background:linear-gradient(135deg, #f59e0b, #ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter: drop-shadow(0 0 10px rgba(245,158,11,0.5));margin-left:-2px;letter-spacing:0px;">OS</span>
+                <span style="font-size:1.5rem;margin-left:4px;filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));">✨</span>
+            </div>
+            <div style="color:{'#a8a8c8' if st.session_state.theme == 'dark' else '#6a6a8a'};
+                 font-size:0.85rem;margin-top:8px;text-transform:uppercase;letter-spacing:1px;font-weight:600;">
+                Player: <span style="color:#00f2fe;font-weight:800;">{st.session_state.user_name}</span></div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -712,8 +714,13 @@ def render_sidebar():
 
         st.markdown("---")
         st.markdown(
-            "<div style='text-align:center;font-size:0.7rem;opacity:0.5;'>"
-            "AI Digital Life Simulator v1.0<br>Hackathon Edition</div>",
+            "<div style='text-align:center;font-size:0.85rem;opacity:0.8; margin-top: 10px;'>"
+            "<div style='display:inline-flex;align-items:baseline;justify-content:center;font-family:\"Inter\", sans-serif;'>"
+            "<span style='font-size:0.85rem;font-weight:900;background:linear-gradient(to right, #00f2fe, #4facfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;'>Life</span>"
+            "<span style='font-size:1.15rem;font-weight:900;background:linear-gradient(135deg, #f59e0b, #ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-left:-1px;'>OS</span>"
+            "<span style='font-size:0.7rem;margin-left:3px;'>✨</span>"
+            "</div> <span style='font-size:0.85rem;font-weight:bold;margin-left:4px;'>v1.0</span><br>"
+            "<span style='font-size:0.65rem;text-transform:uppercase;letter-spacing:1px;opacity:0.6;'>Hackathon Edition</span></div>",
             unsafe_allow_html=True
         )
 
@@ -982,12 +989,17 @@ def render_welcome(theme: str):
     st.markdown(f"""
     <div style="text-align:center;padding:60px 20px;
          background:{bg};backdrop-filter:blur(20px);
-         border-radius:24px;border:1px solid {border};margin-top:20px;
-         cursor: default;">
-        <div style="font-size:4rem;margin-bottom:16px;cursor: default;">🧬</div>
-        <div style="font-size:1.6rem;font-weight:700;color:{text};margin-bottom:8px;cursor: pointer;">
-            Welcome to the AI Digital Life Simulator</div>
-        <div style="font-size:1rem;color:{muted};max-width:500px;margin:0 auto 24px;cursor: pointer;">
+         border-radius:24px;border:1px solid rgba(0, 242, 254, 0.2);margin-top:20px;
+         box-shadow: 0 10px 40px rgba(0, 242, 254, 0.1);cursor: default;">
+        <div style="font-size:4.5rem;margin-bottom:10px;cursor: default; filter: drop-shadow(0 0 20px rgba(0, 242, 254, 0.5));">🌌</div>
+        <div style="font-size:1.4rem;font-weight:600;color:{text};margin-bottom:0px;text-transform:uppercase;letter-spacing:1px;">
+            Welcome to</div>
+        <div style="font-weight:900;line-height:1.1;text-transform:uppercase;margin-bottom:24px;font-family:'Inter', sans-serif;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:4rem;background:linear-gradient(to right, #00f2fe, #4facfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter: drop-shadow(0 4px 15px rgba(0, 242, 254, 0.3));letter-spacing:2px;">Life</span>
+            <span style="font-size:6rem;background:linear-gradient(135deg, #f59e0b, #ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter: drop-shadow(0 0 25px rgba(245,158,11,0.5));margin-left:-6px;letter-spacing:-2px;">OS</span>
+            <span style="font-size:2.8rem;margin-left:8px;filter: drop-shadow(0 0 15px rgba(255,255,255,0.8));">✨</span>
+        </div>
+        <div style="font-size:1.05rem;color:{muted};max-width:550px;margin:0 auto 24px;cursor: pointer;line-height:1.6;">
             Navigate life's toughest decisions. Balance health, career, relationships,
             and finances. How well can you live?</div>
         <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:30px;">

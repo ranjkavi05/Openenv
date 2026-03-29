@@ -1,5 +1,5 @@
 """
-personalities.py — Personality modifier system for the AI Digital Life Simulator.
+personalities.py — Personality modifier system for the LifeOS ✨.
 
 Each personality archetype adjusts how actions, rewards, and state transitions
 behave, creating meaningfully different gameplay experiences.

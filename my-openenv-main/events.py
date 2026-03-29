@@ -1,5 +1,5 @@
 """
-events.py — Dynamic real-world events system for the AI Digital Life Simulator.
+events.py — Dynamic real-world events system for the LifeOS ✨.
 
 Provides a probabilistic event engine that triggers life events during
 simulation steps. Events affect multiple state variables and are logged

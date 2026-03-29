@@ -1,5 +1,5 @@
 """
-utils.py — Utility functions for the AI Digital Life Simulator.
+utils.py — Utility functions for the LifeOS ✨.
 
 General-purpose helpers used across modules: value clamping,
 normalization, pretty-printing, and statistics.

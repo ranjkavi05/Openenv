@@ -1,5 +1,5 @@
 """
-inference.py - Main inference script for the AI Digital Life Simulator.
+inference.py - Main inference script for the LifeOS ✨.
 
 Required by OpenEnv hackathon submission rules.
 Uses the OpenAI Client with API_BASE_URL, MODEL_NAME, and HF_TOKEN

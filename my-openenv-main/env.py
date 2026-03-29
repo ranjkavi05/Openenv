@@ -1,5 +1,5 @@
 """
-env.py — Core Environment for the AI Digital Life Simulator.
+env.py — Core Environment for the LifeOS ✨.
 
 Implements an OpenEnv-compatible reinforcement-learning environment that
 simulates real-world human life decisions. Integrates the reward system,

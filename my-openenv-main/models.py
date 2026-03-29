@@ -1,5 +1,5 @@
 """
-models.py — Data models for the AI Digital Life Simulator.
+models.py — Data models for the LifeOS ✨.
 
 Defines type-safe enums, dataclasses, and structured types used across
 the entire simulation engine. All state representation, action definitions,

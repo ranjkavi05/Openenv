@@ -1,5 +1,5 @@
 """
-agent.py — Baseline rule-based AI agent for the AI Digital Life Simulator.
+agent.py — Baseline rule-based AI agent for the LifeOS ✨.
 
 Implements a simple but effective decision-making heuristic that
 prioritizes survival and balance. Runs a full simulation and prints

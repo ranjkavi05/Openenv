@@ -1,5 +1,5 @@
 """
-grader.py - Agent grading system for the AI Digital Life Simulator.
+grader.py - Agent grading system for the LifeOS ✨.
 
 Evaluates the quality of an agent's final life state on a normalized
 0.0-1.0 scale, where:
