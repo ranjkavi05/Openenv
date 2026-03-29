@@ -126,8 +126,11 @@ def load_css():
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     }}
 
-    .stSidebar {{
-        background: {"rgba(15,15,30,0.95)" if theme == "dark" else "rgba(240,242,248,0.95)"} !important;
+    [data-testid="stSidebar"],
+    [data-testid="stSidebar"] > div:first-child,
+    section[data-testid="stSidebar"] {{
+        background-color: {"rgba(15,15,30,0.95)" if theme == "dark" else "rgba(245,246,250,1)"} !important;
+        background-image: none !important;
         backdrop-filter: blur(20px) !important;
     }}
 
